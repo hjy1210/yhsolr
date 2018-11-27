@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yh search</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--<script src="scripts/axios.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/yh.css">
+</head>
+
+<body>
+    <div id="app" class="yh">
+        <a href="http://www.ceec.edu.tw/AppointExam/AppointExamPaper/107Drse_Paper/08-107學年度指考物理科_定稿.pdf">08-107學年度指考物理科_定稿.pdf</a>
+        <p>桌面查詢系統</p>       
+        <div>
+            <span>搜尋字串:</span>
+            <input v-model="q">
+            <button v-on:click="startSearch">搜尋</button>
+        </div>
+        <div v-if="error.length > 0">{{error}}</div>
+        <div v-if="numFound > 0">
+            <button v-bind:disabled="start <= 0" v-on:click="prevPage">前一頁</button>
+            <span>共 {{numFound}} 筆，每頁 {{rows}} 筆，第 {{start+1}} 頁</span>
+            <button  v-bind:disabled="start >= Math.ceil(numFound/rows)-1"  v-on:click="nextPage">下一頁</button>
+        </div>
+        <!--<textarea cols="80" rows="60">{{ highlights }}</textarea>-->
+            <div v-for="file in Object.keys(highlights)">
+                <a v-bind:href="getFileLink(file)" target="_blank">{{file}}</a>
+                <div v-for="ps in highlights[file]">
+                    <p v-for="p in ps" v-html="p"></p>
+                </div>
+                <hr />
+            </div>
+    </div>
+
+    <script src="scripts/yh.js"></script>
+
+</body>
+
+</html>
