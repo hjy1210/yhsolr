@@ -77,13 +77,13 @@ bin\solr stop -all
 bin\solr status
 ```
 ## 查詢文件集清單
-http://192.168.182.80:8983/solr/admin/collections?action=list
+`http://192.168.182.80:8983/solr/admin/collections?action=list`
 
 ## 管理 UI
-http://192.168.182.80:8983/solr/
+`http://192.168.182.80:8983/solr/`
 
 ## velocity 查詢UI
-http://192.168.182.80:8983/solr/allsortofocuments/browse
+`http://192.168.182.80:8983/solr/allsortofocuments/browse`
 
 ## 一次性初始設定 Standalone 環境
 在 d:\solr-7.5.0 裡面，執行
@@ -106,7 +106,7 @@ bin\solr create -c allsortofdocuments -d server\solr\configsets\yh
 * 防火牆設定，查詢網頁網站所在的電腦防火牆輸入規則要允許TCP阜9123,8983,7574,9983，其中後面的三個是Solr Server 在使用
 
 ## 查詢方式
-瀏覽 http://192.168.182.80:9123
+瀏覽 `http://192.168.182.80:9123`
 
 ## 測試注意事項
 瀏覽器的cache要經查清除。
