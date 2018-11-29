@@ -1,9 +1,9 @@
 
 
 ## Microsoft Edge Issue
-在網頁瀏覽doc的時候，暫存檔的位置在 
-`<user home>/AppData/Local/Packages/Microsoft.MicrosoftEdge_xxxxxxx/TempState/Downloads`目錄裡，
-Edge 關掉後會清空。
+用Edge或IE瀏覽docx/doc的時候，暫存檔的位置在 
+`<user home>/AppData/Local/Packages/Microsoft.MicrosoftEdge_xxxxxxx/TempState/Downloads`或`<user home>/AppData/Local/Packages/????`目錄裡，
+瀏覽器關掉後會清空。
 
 ## Chrome Issue
 2015000042.pdf 在 Chrome 裡面因缺少字形而變成亂碼，加裝 PDF Viewer 2.0.673 擴充功能就可解決。 doc/docx 檔裡面的數學式子錯亂。

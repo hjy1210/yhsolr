@@ -13,30 +13,28 @@
 </head>
 
 <body>
-    <div id="app" class="yh">
-        <a href="http://www.ceec.edu.tw/AppointExam/AppointExamPaper/107Drse_Paper/08-107學年度指考物理科_定稿.pdf">08-107學年度指考物理科_定稿.pdf</a>
-        <p>桌面查詢系統</p>       
+    <div class="yh" id="app">
+        <p>桌面查詢系統</p>
         <div>
-            <span>搜尋字串:</span>
-            <input v-model="q">
-            <button v-on:click="startSearch">搜尋</button>
+          <span>搜尋字串:</span>
+          <input v-model="q">
+          <button v-on:click="startSearch">搜尋</button>
         </div>
         <div v-if="error.length > 0">{{error}}</div>
         <div v-if="numFound > 0">
-            <button v-bind:disabled="start <= 0" v-on:click="prevPage">前一頁</button>
-            <span>共 {{numFound}} 筆，每頁 {{rows}} 筆，第 {{start+1}} 頁</span>
-            <button  v-bind:disabled="start >= Math.ceil(numFound/rows)-1"  v-on:click="nextPage">下一頁</button>
+          <button v-bind:disabled="start <= 0" v-on:click="prevPage">前一頁</button>
+          <span>共 {{numFound}} 筆，每頁 {{rows}} 筆，第 {{start+1}} 頁</span>
+          <button v-bind:disabled="start >= Math.ceil(numFound/rows)-1" v-on:click="nextPage">下一頁</button>
         </div>
-        <!--<textarea cols="80" rows="60">{{ highlights }}</textarea>-->
-            <div v-for="file in Object.keys(highlights)">
-                <a v-bind:href="getFileLink(file)" target="_blank">{{file}}</a>
-                <div v-for="ps in highlights[file]">
-                    <p v-for="p in ps" v-html="p"></p>
-                </div>
-                <hr />
-            </div>
-    </div>
-
+        <div v-for="(obj,ind) in docs" :key="ind">
+          <span>({{obj.score}})&nbsp;</span><a v-bind:href="getFileLink(obj.id)" target="_blank">{{obj.id}}</a>
+          <div v-for="(ps,i) in highlights[obj.id]" :key="i">
+            <p v-for="(p,j) in ps" v-html="p" :key="j"></p>
+          </div>
+          <hr>
+        </div>
+      </div>
+    
     <script src="scripts/yh.js"></script>
 
 </body>
