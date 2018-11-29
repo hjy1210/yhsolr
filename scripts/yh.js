@@ -37,8 +37,7 @@ var app = new Vue({
         },
         getFileLink: function (file) {
             file = file.replace("\\", "/");
-            //"d:/yhroot/".length==10
-            return file.substring("d:/yhroot/".length);
+            return "http://192.168.182.80:9001/"+file.substring("d:/data/".length);
         },
         prevPage: function () {
             this.start = this.start - 1;

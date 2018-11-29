@@ -59,7 +59,7 @@ bin\solr create -c allsortofdocuments -d server\solr\configsets\yh -s 2 -rf 2
 ```
 ## 新增 allsortofdocuments文件集裡面的文件
 ```
-java -jar -Dc=allsortofdocuments -Dauto -Drecursive=yes example\exampledocs\post.jar d:\yhroot\data\allsortofdocuments
+java -jar -Dc=allsortofdocuments -Dauto -Drecursive=yes example\exampledocs\post.jar d:\data\allsortofdocuments
 ```
 ## 刪除 allsortofdocuments文件集裡面的所有文件
 java -Ddata=args -Dc=allsortofdocuments -jar example\exampledocs\post.jar "<delete><query>*:*</query></delete>"
