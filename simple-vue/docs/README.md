@@ -62,7 +62,9 @@ bin\solr create -c allsortofdocuments -d server\solr\configsets\yh -s 2 -rf 2
 java -jar -Dc=allsortofdocuments -Dauto -Drecursive=yes example\exampledocs\post.jar d:\data\allsortofdocuments
 ```
 ## 刪除 allsortofdocuments文件集裡面的所有文件
+```
 java -Ddata=args -Dc=allsortofdocuments -jar example\exampledocs\post.jar "<delete><query>*:*</query></delete>"
+```
 
 ## 移除 allsortofdocuments文件集 
 ```
@@ -90,7 +92,7 @@ bin\solr status
 ```
 md d:\yhstandalone\solr
 copy server\solr\solr.xml d:\yhstandalone\solr
-copy server\solr\zoocfg d:\yhstandalone\solr
+copy server\solr\zoo.cfg d:\yhstandalone\solr
 ```
 ## 啟動 Solr Standalone
 ```
@@ -102,7 +104,6 @@ bin\solr create -c allsortofdocuments -d server\solr\configsets\yh
 ```
 ## 架設查詢網站
 * 用 IIS 管理員架設新站台，用TCP 9123阜繫結
-* 因應CORS問題，站台的http回應標頭Access-Control-Allow-Origin的值設為*，也許因為網站與Solr Server都在同一機器而可有可無。
 * 防火牆設定，查詢網頁網站所在的電腦防火牆輸入規則要允許TCP阜9123,8983,7574,9983，其中後面的三個是Solr Server 在使用
 
 ## 查詢方式
