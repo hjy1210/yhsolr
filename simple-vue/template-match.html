@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello OpenCV.js</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <h2>Hello OpenCV.js</h2>
+    <p id="status">OpenCV.js is loading...</p>
+    <div>
+        <div class="inputoutput">
+            <img id="imageSrc" alt="No Image" hidden />
+            <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
+        </div>
+        <div class="inputoutput">
+            <canvas id="imageCanvasInput" hidden></canvas>
+            <div class="caption">imageCanvasInput</div>
+        </div>
+        <div class="inputoutput">
+            <img id="imageSrc2" alt="No Image" hidden />
+            <div class="caption">imageSrc <input type="file" id="fileInput2" name="file" /></div>
+        </div>
+        <div class="inputoutput">
+            <canvas id="templateCanvasInput"  hidden></canvas>
+            <div class="caption">templateCanvasInput</div>
+        </div>
+        <button onclick="getMatch()">Get Match</button>
+        <div class="inputoutput">
+            <canvas id="canvasOutput"></canvas>
+            <div class="caption">canvasOutput</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        let imgElement = document.getElementById('imageSrc');
+        let inputElement = document.getElementById('fileInput');
+        inputElement.addEventListener('change', (e) => {
+            imgElement.src = URL.createObjectURL(e.target.files[0]);
+        }, false);
+        imgElement.onload = function () {
+            let mat = cv.imread(imgElement);
+            cv.imshow('imageCanvasInput', mat);
+            mat.delete();
+        };
+        let imgElement2 = document.getElementById('imageSrc2');
+        let inputElement2 = document.getElementById('fileInput2');
+        inputElement2.addEventListener('change', (e) => {
+            imgElement2.src = URL.createObjectURL(e.target.files[0]);
+        }, false);
+        imgElement2.onload = function () {
+            let mat = cv.imread(imgElement2);
+            cv.imshow('templateCanvasInput', mat);
+            mat.delete();
+        };
+
+        function onOpenCvReady() {
+            document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+        }
+        function getMatch() {
+            //let src = cv.imread('imageCanvasInput');
+            //let templ = cv.imread('templateCanvasInput');
+            let src = cv.imread(imgElement);
+            let templ = cv.imread(imgElement2);
+            let dst = new cv.Mat();
+            let mask = new cv.Mat();
+            cv.matchTemplate(src, templ, dst, cv.TM_CCOEFF, mask);
+            let result = cv.minMaxLoc(dst, mask);
+            let maxPoint = result.maxLoc;
+            let color = new cv.Scalar(0, 0, 255, 255);
+            let point = new cv.Point(maxPoint.x + templ.cols, maxPoint.y + templ.rows);
+            cv.rectangle(src, maxPoint, point, color, 1, cv.LINE_8, 0);
+            cv.imshow('canvasOutput', src);
+            src.delete(); dst.delete(); mask.delete();
+
+        }
+    </script>
+    <!--<script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>-->
+    <script async src="https://docs.opencv.org/master/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
+
+</html>
